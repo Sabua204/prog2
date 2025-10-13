@@ -1,0 +1,42 @@
+Opening files...
+Parsing specification from standard input...
+Error at 37(8): Syntax error
+Error at 99(15): Syntax Error
+Error at 177(6): Syntax error
+Error at 185(24): Syntax Error
+Error at 193(6): Syntax error
+Error at 263(31): Syntax Error
+Error at 309(52): Syntax error
+Error at 363(22): Syntax Error
+Warning at 439(31): Unrecognized character '('(40) -- ignored
+Warning at 439(32): Unrecognized character '?'(63) -- ignored
+Warning at 439(33): Unrecognized character ')'(41) -- ignored
+===== Terminals =====
+DIVIDE STRING_LITERAL GE CHAR_LITERAL PERIOD 
+LPAREN INT ARRAY FOR MINUS 
+RPAREN SEMICOLON AND LT FUN 
+TYPE IN OR COMMA PLUS 
+ASSIGN IF ID LE OF 
+EOF error NULL NEQ BREAK 
+EQ LBRACK TIMES COLON LBRACE 
+ELSE RBRACK TO WHILE LET 
+THEN RBRACE MODULUS DECIMAL_LITERAL END 
+GT VAR DO 
+
+===== Non terminals =====
+$START 
+
+===== Productions =====
+
+===== Viable Prefix Recognizer =====
+Closing files...
+------- CUP v0.10g Parser Generation Summary -------
+  8 errors and 3 warnings
+  48 terminals, 1 non terminal, and 0 productions declared, 
+  producing 0 unique parse states.
+  0 terminals declared but not used.
+  0 non terminals declared but not used.
+  0 productions never reduced.
+  0 conflicts detected (3 expected).
+  No code produced.
+---------------------------------------------------- (v0.10g)
