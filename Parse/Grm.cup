@@ -30,68 +30,65 @@ scan with {: return lexer.nextToken(); :};
 terminal String ID, STRING_LITERAL;
 terminal Integer DECIMAL_LITERAL;
 terminal char  CHAR_LITERAL;
-terminal  INT, COMMA, COLON, SEMICOLON, LPAREN, RPAREN, LBRACK, RBRACK, 
-	LBRACE, RBRACE, PERIOD, PLUS, MINUS, TIMES, DIVIDE, EQ, NEQ, LT, LE, 
-	GT, GE, AND, OR, ASSIGN, ARRAY, IF, THEN, ELSE, WHILE, FOR, TO,
-	DO, LET, IN, END, OF, BREAK, NULL, FUN, VAR, TYPE, MODULUS;
-	SHORT, SIGNED, ARROW, DIVASSIGN, CONST, REGISTER, ENUM, INCREMENT, DECREMENT,SIZEOF,
-	SUBASSIGN, DOUBLE, BWISEANDASSIGN, STRUCT, MODASSIGN, TILDE, BITWISEAND, GOTO, LSHIFTASSIGN
-	LONG, UNION, CHAR, ADDASSIGN, VOID, EXTERN, RETURN, EOF, MULASSIGN, ELIPSIS, error, 
-	CONTINUE, UNSIGNED, BWISEOR, BWISEXOR, BWISEORASSIGN, RSHIFTASSIGN, VOLATILE, RSHIFT, 
-	BWISEXORASSIGN, STATIC, LSHIFT, TYPEDEF, AUTO
+terminal  MODULUS, BWISEAND, BWISEOR, LPAREN, RPAREN, TIMES, PLUS, COMMA, MINUS, PERIOD, DIVIDE, COLON, SEMICOLON, LT, ASSIGN, GT, 
+		LBRACK, RBRACK, BWISEXOR, RBRACE, LBRACE, TILDE, NEQ, MODASSIGN, AND, BWISEANDASSIGN, MULASSIGN, AMPERSAND, INCREMENT, ADDASSIGN, DECREMENT,
+		SUBASSIGN, ARROW, DIVASSIGN,SWITCH, FUN, LSHIFT, LE, EQ, GE, RSHIFT, BWISEXORASSIGN, DO, IF, BWISEORASSIGN, OR, ELIPSIS, LSHIFTASSIGN,
+		FOR, INT, VAR, AUTO, CHAR, ELSE, ENUM, GOTO, LONG, VOID, BREAK, CONST, FLOAT, SHORT, UNION, WHILE, DOUBLE, EXTERN, RETURN, SIGNED, 
+		SIZEOF, STATIC, STRUCT, CASE, TYPEDEF, CONTINUE, REGISTER, UNSIGNED, DEFAULT, VOLATILE;
 
 
-non terminal Absyn.expression          expression;
-non terminal Absyn.expressionList      expressionList;
-
-non terminal Absyn.SimpleVar    SimpleVar;
-non terminal Absyn.Var          Var;
-non terminal Absyn.SubscriptVar   SubscriptVar;
-non terminal Absyn.VarDec         VarDec;
-non terminal Absyn.VarExp        VarExp;
-
-non terminal Absyn.WhileExp       WhileExp;
-
-non terminal Absyn.Absyn        Absyn;
-
-non terminal Absyn.ArrayExp     ArrayExp;
-non terminal Absyn.ArrayTy      ArrayTy;
-
-non terminal Absyn.AssignExp           AssignExp;
-non terminal Absyn.NullExp             NullExp;
-
-non terminal Absyn.Print        Print;
-non terminal Absyn.CallExp      CallExp;
-
-non terminal Absyn.Dec          Dec
-non terminal Absyn.DecList      DecList;
-
-non terminal Absyn.FieldExpList          FieldExpList;
-non terminal Absyn.FieldList             FieldList;
-non terminal Absyn.FieldVar              FieldVar;
-
-non terminal Absyn.FunctionDec           FunctionDec;
-
-non terminal Absyn.ForExp                ForExp;
-non terminal Absyn.IfExp                 IfExp;
-non terminal Absyn.IntExp                IntExp;
-non terminal Absyn.SeqExp                SeqExp;
-non terminal Absyn.StringExp             StringExp;
-non terminal Absyn.BreakExp              BreakExp;
-non terminal Absyn.OpExp                 OpExp;
-
-
-non terminal Absyn.NameTy         NameTy;
-
-non terminal Absyn.RecordExp      RecordExp;
-non terminal Absyn.RecordTy       RecordTy;
-
-non terminal Absyn.Ty             Ty;
-non terminal Absyn.TypeDec        TypeDec;
-
+non terminal Absyn.Exp expression, constant_expression,expression_opt,multiplicative_expression,additive_expression;
+non terminal Absyn.ExpList expression_list;
+non terminal Absyn.ExpPart expression_part;
+non terminal Absyn.Var Var;
+non terminal Absyn.Absyn Absyn;
+non terminal Absyn.ArrayTy expression_array_type;
+non terminal Abysn.EmptyArrayTypeList empty_array_type_list;
+non terminal Absyn.ExpressionArrayType empty_array_type;
+non terminal Absyn.ExpressionArrayTypeList expression_array_type_list;
+non terminal Absyn.BitFieldList bitfield_list;
+non terminal Absyn.BitFieldValue bitfield_value;
+non terminal Absyn.BracketsList brackets_list;
+non terminal Absyn.CastExp cast_expression;
+non terminal Absyn.CompoundStmt compound_statement;
+non terminal Absyn.CondExp conditional_expression;
+non terminal Absyn.AssignExp assignment_expression;
+non terminal Absyn.Dec declaration;
+non terminal Absyn.DecList declaration_list,declaration_list_opt;
+non terminal Absyn.ArgExpList argument_expression_list;
+non terminal Absyn.Name name;
+non terminal Absyn.NameTy type_name;
+non terminal Absyn.IdentifierList identifier_list,identifier;
+non terminal Absyn.Initialization initialization;
+non terminal Absyn.Initializer initializer;
+non terminal Absyn.InitializerList initializer_list;
+non terminal Absyn.Statement statement;
+non terminal Absyn.IterStmt iteration_statement;
+non terminal Absyn.LabeledStmt labeled_statement;
+non terminal Absyn.SelectStmt selection_statement;
+non terminal Absyn.StmtList statement_list,jump_statement,statement_list_opt;
+non terminal Absyn.ExpressionStmt expression_statement;
+non terminal Absyn.ParameterTypeList parameter_type_list;
+non terminal Absyn.ParamList parameter_list,type_parameters;
+non terminal Absyn.PointerList pointer_list;
+non terminal Absyn.PostFixExp postfix_expression;
+non terminal Absyn.PrimaryExp primary_expression;
+non terminal Absyn.Ty type;
+non terminal Absyn.TypeDec TypeDec;
+non terminal Absyn.TypeDefName typedef_name;
+non terminal Absyn.TypeAugments type_augments;
+non terminal Absyn.StructDeclarationList struct_declaration_list;
+non terminal Absyn.StructOrUnion struct_or_union;
+non terminal Absyn.StructOrUnionDeclarator struct_or_union_declarator;
+non terminal Absyn.Enumerator enumerator;
+non terminal Absyn.EnumeratorList enumerator_list;
+non terminal Absyn.TypeQualifierList type_qualifier_list,type_qualifier;
+non terminal Absyn.UnaryExp unary_expression;
+non terminal Abysn.UnaryOps unary_operator;
 
 precedence left PLUS, MINUS;
 precedence left TIMES, DIVIDE, MODULUS;
+precedence left BWISEANDASSIGN, BWISEXORASSIGN, BWISEORASSIGN, BWISEAND, BWISEXOR, BWISEOR;
 
 
 start with expression;
@@ -100,19 +97,27 @@ expression ::= error:e
 	  {: RESULT = new Absyn.SeqExp(eleft, null); :}
 	| Var:v
 	  {: RESULT = new Absyn.VarExp(vleft, v); :}
-	| assignment_expr
-	|  expr COMMA assignment_expr
+	| assignment_expression
+	|  expression COMMA assignment_expression
 	;
   
 
 
 declaration	::= VAR bitfield_list type name initialization SEMICOLON
+		{: RESULT = new Absyn.VarDecl(e1left, e1, e2, e3, e4) :}
 		| VAR bitfield_list type name initialization SEMICOLON
-		| FUN bitfield_list type name parameters compound_statement
+		 {: RESULT = new Absyn.FunDecl(e1left, e1, e2, e3, e4) :}
+		| FUN bitfield_list type name type_parameters compound_statement
+		  {: RESULT = new Absyn.FunDecl(e1left, e1, e2, e3, e4) :}
 		| FUN bitfield_list type name type_parameters SEMICOLON
+		 {: RESULT = new Absyn.FunDecl(e1left, e1, e2, e3, e4) :}
 		| TYPEDEF type name SEMICOLON
+		 {: RESULT = new Absyn.TypedefDecl(e1left, e1, e2) :}
 		| bitfield_list struct_or_union name struct_or_union_declarator
-		| ENUM ID LBRACE enumerator_list RBRACE;	
+		  {: RESULT = new Absyn.StructOrUnionDecl(e1left, e1, e2, e3, e4) :}
+		| ENUM ID LBRACE enumerator_list RBRACE
+		{: RESULT = new Absyn.EnumDecl(e1left, e1, e2) :}
+		;	
 
 Var ::=   ID:n
 	  {: RESULT = new Absyn.SimpleVar(nleft, sym(n)); :}
@@ -120,84 +125,98 @@ Var ::=   ID:n
 
 
 expression_list	::= expression_list expression_part
-		| expression_part;
+		 {: RESULT = new Absyn.ExpList(e1left, e1, e2) :}
+		| expression_part
+		 {: RESULT = new Absyn.ExpList(e1left, e1) :};
 
-expression_part	::= expression SEMI;
+expression_part	::= expression SEMICOLON
+			 {: RESULT = new Absyn.ExpPart(e1left, e1) :};
 
 
 statement
-  ::= labeled_statement
-	{:RESULT = new Absyn.Statement(e1left, e1):}
-   |  compound_statement
-   {:RESULT = new Absyn.Statement(e1left, e1):}
-   |  expression_statement
-   {:RESULT = new Absyn.Statement(e1left, e1):}
-   |  selection_statement
-   {:RESULT = new Absyn.Statement(e1left, e1):}
-   |  iteration_statement
-   {:RESULT = new Absyn.Statement(e1left, e1):}
-   |  jump_statement
-   {:RESULT = new Absyn.Statement(e1left, e1):}
+  ::= labeled_statement:e
+	{:RESULT = new Absyn.Statement(eleft, e):}
+   |  compound_statement:e
+   {:RESULT = new Absyn.Statement(eleft, e):}
+   |  expression_statement:e
+   {:RESULT = new Absyn.Statement(eleft, e):}
+   |  selection_statement:e
+   {:RESULT = new Absyn.Statement(eleft, e):}
+   |  iteration_statement:e
+   {:RESULT = new Absyn.Statement(eleft, e):}
+   |  jump_statement:e
+   {:RESULT = new Absyn.Statement(eleft, e):}
    ;
 
 labeled_statement
-  ::= IDENTIFIER COLON statement
+  ::= ID:e1 COLON statement:e2
      {:RESULT = new Absyn.LabeledStmt(e1left, e1, e2):}
-   |  CASE constant_expression COLON statement
+   |  CASE constant_expression:e1 COLON statement:e2
     {:RESULT = new Absyn.LabeledStmt(e1left, e1, e2):}
-   |  DEFAULT COLON statement
+   |  DEFAULT:e1 COLON statement:e2
     {:RESULT = new Absyn.LabeledStmt(e1left, e1, e2):}
    ;
 
 compound_statement
   ::= LBRACE declaration_list_opt statement_list_opt RBRACE
-   ;
+      {: RESULT = new Absyn.CompoundStmt(@1left, (Absyn.DecList)$2, (Absyn.StmtList)$3); :}
+  ;
 
 declaration_list_opt
   ::= 
+   {: RESULT = null; :}
    |  declaration_list
+   {: RESULT = (Absyn.DecList)$1; :}
    ;
 
 declaration_list
   ::= declaration
+  {: RESULT = new Absyn.DecList((Absyn.Dec)$1, null); :}
    |  declaration_list declaration
+    {: RESULT = new Absyn.DecList((Absyn.Dec)$2, (Absyn.DecList)$1); :}
    ;
 
 statement_list_opt
   ::= 
+  {: RESULT = null; :}
    |  statement_list
+   {: RESULT = (Absyn.StmtList)$1; :}
    ;
 
-statement_list ::= statement
-        {: RESULT = new Absyn.StatementList(e1left, e1) :}
+statement_list ::= statement:e
+        {: RESULT = new Absyn.StmtList(eleft, e) :}
     | statement_list statement
-        {: RESULT = new Absyn.StatementList(e1left, e1, e2) :}
-
+        {: RESULT = new Absyn.StmtList(eleft, e1, e2) :}
+	;
 expression_statement
   ::= expression_opt SEMICOLON
+   {: RESULT = new Absyn.ExpressionStmt(@1left, (Absyn.Exp)$1); :}
    ;
 
 expression_opt
   ::= 
+	{: RESULT = null; :}
    |  expression
+   {: RESULT = (Absyn.Exp)$1; :}
    ;
 
-selection_statement ::= IF LPAREN expression RPAREN statement
+selection_statement ::= IF LPAREN expression:e1 RPAREN statement:e2
         {: RESULT = new Absyn.SelectStmt(e1left, e1, e2) :}
-    | IF LPAREN expression RPAREN statement ELSE statement
+    | IF LPAREN expression:e1 RPAREN statement:e2 ELSE statement:e3
         {: RESULT = new Absyn.SelectStmt(e1left, e1, e2, e3) :}
-    | SWITCH LPAREN expression RPAREN statement
-        {: RESULT = new Absyn.SelectStmt(e1left, e1, e2, e3, e4) :}
+    | SWITCH LPAREN expression:e1 RPAREN statement:e2
+        {: RESULT = new Absyn.SelectStmt(e1left, e1, e2) :}
+		;
 
 iteration_statement
-  ::= WHILE LPAREN expression RPAREN statement
-  {:RESULT = new Absyn.IterStmt(e1left, e1,s1)}
-   |  DO statement WHILE LPAREN expression RPAREN SEMICOLON
-     {:RESULT = new Absyn.IterStmt(s1left, s1,e1)}
-   |  FOR LPAREN expression_opt SEMICOLON
-                     expression_opt SEMICOLON
-                     expression_opt RPAREN statement
-	{:RESULT = new Absyn.IterStmt(i1left, i1,e1,ic1, s1)}
+  ::= WHILE LPAREN expression:e1 RPAREN statement:s1
+  {:RESULT = new Absyn.IterStmt(e1left, e1, s1):}
+   |  DO statement:s1 WHILE LPAREN expression:e1 RPAREN SEMICOLON
+     {:RESULT = new Absyn.IterStmt(s1left, s1, e1):}
+   |  FOR LPAREN expression_opt:i1 SEMICOLON
+                     expression_opt:e1 SEMICOLON
+                     expression_opt:ic1 RPAREN statement:s1
+	{:RESULT = new Absyn.IterStmt(i1left, i1,e1,ic1, s1):}
    ;
 
 name		::= ID;
@@ -213,80 +232,118 @@ bitfield_value	::= CONST
 		| REGISTER;
 
 empty_array_type_list	::= empty_array_type
-			| empty_array_type_list empty_array_type;
+			{: RESULT = new Absyn.EmptyArrayTypeList(1); :}
+			| empty_array_type_list empty_array_type
+			{:
+         Absyn.EmptyArrayTypeList prev = (Absyn.EmptyArrayTypeList)$1;
+         RESULT = new Absyn.EmptyArrayTypeList(prev.count + 1);
+      :};
 
 empty_array_type	::= LBRACK RBRACK;
 
 expression_array_type_list	::= expression_array_type
-			| expression_array_type_list expression_array_type;
+			{: RESULT = new Absyn.ExpList((Absyn.Exp)$1, null); :}
+			| expression_array_type_list expression_array_type
+			{:RESULT = new Absyn.ExpList((Absyn.Exp)$2, (Absyn.ExpList)$1); :};
 
-expression_array_type	::= LBRACK constant_expression RBRACK;
+expression_array_type	::= LBRACK constant_expression RBRACK
+							{: RESULT = (Absyn.Exp)$2; :};
 
 type		::= type_name type_augments
 		| type_name;
 
-		type_qualifier_list    ::= type_qualifier
-            | type_qualifier_list type_qualifier;
+type_qualifier_list    ::= type_qualifier
+						{: RESULT = new Absyn.TypeQualifierList((String)$1); :}
+                       | type_qualifier_list type_qualifier
+					   {: RESULT = new Absyn.TypeQualifierList((String)$2, (Absyn.TypeQualifierList)$1); :}
+  						;
 
 type_augments	::= pointer_list
+			{: RESULT = new Absyn.TypeAugments(((Integer)$1).intValue()); :}
 		| brackets_list
-		| pointer_list brackets_list;	
+		{: RESULT = new Absyn.TypeAugments((Absyn.BracketsList)$1); :}
+		| pointer_list brackets_list
+		 {: RESULT = new Absyn.TypeAugments(((Integer)$1).intValue(),
+                                         (Absyn.BracketsList)$2); :}
+		;	
 
 brackets_list	::= empty_array_type_list 
-		| expression_array_type_list;
+			{: RESULT = new Absyn.BracketsList(((Absyn.EmptyArrayTypeList)$1).count); :}
+		| expression_array_type_list
+		{: RESULT = new Absyn.BracketsList((Absyn.ExpList)$1); :}
+		;
 
 pointer_list	::= TIMES 
-		| pointer_list TIMES;
+			{: RESULT = Integer.valueOf(1); :}
+		| pointer_list TIMES
+		{:
+         int prev = ((Integer)$1).intValue();
+         RESULT = Integer.valueOf(prev + 1);
+      :}
+	  ;
 
-type_name	::= VOID
-		{: RESULT = new Absyn.NameTy(e1left, e1):}
-		| CHAR
-		{: RESULT = new Absyn.NameTy(e1left, e1):}
-		| SHORT
-		{: RESULT = new Absyn.NameTy(e1left, e1):}
-		| INT
-		{: RESULT = new Absyn.NameTy(e1left, e1):}
-		| LONG
-		{: RESULT = new Absyn.NameTy(e1left, e1):}
-		| FLOAT
-		{: RESULT = new Absyn.NameTy(e1left, e1) :}
-		| DOUBLE
-		{: RESULT = new Absyn.NameTy(e1left, e1) :}
-		| ENUM ID
-		{: RESULT = new Absyn.NameTy(e1left, e1) :}
-		| ID
-		{: RESULT = new Absyn.NameTy(e1left, e1) :}
+type_name	::= VOID:e
+		{: RESULT = new Absyn.NameTy(eleft, e):}
+		| CHAR:e
+		{: RESULT = new Absyn.NameTy(eleft, e):}
+		| SHORT:e
+		{: RESULT = new Absyn.NameTy(eleft, e):}
+		| INT:e
+		{: RESULT = new Absyn.NameTy(eleft, e):}
+		| LONG:e
+		{: RESULT = new Absyn.NameTy(eleft, e):}
+		| FLOAT:e
+		{: RESULT = new Absyn.NameTy(eleft, e) :}
+		| DOUBLE:e
+		{: RESULT = new Absyn.NameTy(eleft, e) :}
+		| ENUM ID:e
+		{: RESULT = new Absyn.NameTy(eleft, e) :}
+		| ID:e
+		{: RESULT = new Absyn.NameTy(eleft, e) :}
+		;
 
 initialization	::= 
 		| ASSIGN initializer;
 
-struct_or_union_declarator	::= LBRACE struct_declaration_list RBRACE;
+struct_or_union_declarator	::= LBRACE struct_declaration_list RBRACE
+								{: RESULT = new Absyn.StructOrUnionDeclarator(@1left, (Absyn.StructDeclList)$2); :};
 
 enumerator_list	::= enumerator
-		| enumerator_list COMMA enumerator;
+			 {: RESULT = new Absyn.EnumeratorList(@1left, (Absyn.Enumerator)$1); :}
+		| enumerator_list COMMA enumerator
+		{: RESULT = new Absyn.EnumeratorList(@1left,
+                                           (Absyn.Enumerator)$3,
+                                           (Absyn.EnumeratorList)$1); :}
+  ;
 
 enumerator	::= ID
-		| ID ASSIGN constant_expression;
+`{: RESULT = new Absyn.Enumerator(@1left, $1); :}
+		| ID ASSIGN constant_expression
+		{: RESULT = new Absyn.Enumerator(@1left, $1, (Absyn.Exp)$3); :};
 
 struct_declaration_list	::= type name SEMICOLON
 			| struct_declaration_list type name SEMICOLON;
 
 struct_or_union	::= STRUCT
-		| UNION;
+		{: RESULT = new Absyn.Enumerator(@1left, $1); :}
+		| UNION
+		{: RESULT = new Absyn.StructOrUnion(@1left, $1); :}
+		;
 
 type_parameters	::= LPAREN parameter_type_list RPAREN
-		| LPAREN parameter_type_list COMMA ELIPSES RPAREN
-		| LPAREN RPAREN;
+		 {: RESULT = new Absyn.ParamList(@1left, (Absyn.ParamTypeList)$2); :}
+		| LPAREN parameter_type_list COMMA ELIPSIS RPAREN
+		{: RESULT = new Absyn.ParamList(@1left,
+                                       (Absyn.ParamTypeList)$2, true); :} 
+		| LPAREN RPAREN
+		{: RESULT = new Absyn.ParamList(@1left); :};
 
-parameters	::= LPAREN parameter_list RPAREN
-		| LPAREN parameter_list COMMA ELIPSES RPAREN
-		| LPAREN RPAREN;
 
-parameter_list	::= type name
+parameter_list	::= type_name
 		| parameter_list COMMA type name;
 
-type_qualifier  ::= const
-            | volatile;
+type_qualifier  ::= CONST
+            | VOLATILE;
 
 parameter_type_list	::= type
 			| parameter_type_list COMMA type;
@@ -294,175 +351,203 @@ parameter_type_list	::= type
 initializer_list	::= initializer
 			| initializer_list COMMA initializer;
 
-initializer		::= assignment_expression
-			| LBRACE initializer_list RBRACE;		
-			{:RESULT = new Absyn.IntExp(e1left, v1)}	
+initializer		::= assignment_expression:e
+				{:RESULT = new Absyn.Initializer(eleft,e):}
+			| LBRACE initializer_list:e RBRACE		
+			{:RESULT = new Absyn.Initializer(eleft,e):}
+			;
 
 
-identifier_list    ::= identifier
-            | identifier_list identifier
+identifier_list  ::= identifier:e1
+			 {: RESULT = new Absyn.IdentifierList(e1left, e1) :}
+            | identifier_list:e1 identifier:e2
+			 {: RESULT = new Absyn.IdentifierList(e1left, e1, e2) :}
+			;
 
-typedef_name    ::= identifier
+typedef_name ::= identifier:e
+{:RESULT = new Absyn.TypeDefName(eleft,e):}
+;
 
 
-primary_expression  ::= IDENTIFIER
-					{: RESULT = new Absyn.PrimaryExp(e1left, e1):}
-                    | CONSTANT
-					{: RESULT = new Absyn.PrimaryExpp(e1left, e1):}
-                    | STRING_LITERAL
-					{: RESULT = new Absyn.PrimaryExp(e1left, e1):}
-                    | LPAREN expression RPAREN
-					{: RESULT = new Absyn.PrimaryExp(e1left, e1):}
+primary_expression  ::= ID:e
+					{: RESULT = new Absyn.PrimaryExp(eleft, e):}
+                    | CONST:e
+					{: RESULT = new Absyn.PrimaryExp(eleft, e):}
+                    | STRING_LITERAL:e
+					{: RESULT = new Absyn.PrimaryExp(eleft, e):}
+                    | LPAREN:lp expression:e RPAREN
+					{: RESULT = new Absyn.PrimaryExp(lpleft, e):}
+					;		
 
-postfix_expression   ::= primary_expression
-					 {:RESULT = new Absyn.PostFixExp(e1left, e1, 0, e2):}
-             |postfix_expression LBRACK expression RBRACK
+postfix_expression   ::= primary_expression:e
+					 {:RESULT = new Absyn.PostFixExp(eleft, e, 0):}
+             |postfix_expression:e1 LBRACK expression:e2 RBRACK
 			 {:RESULT = new Absyn.PostFixExp(e1left, e1, 1, e2):}
-              |postfix_expression LPAREN argument_expression_list RPAREN
+              |postfix_expression:e1 LPAREN argument_expression_list:e2 RPAREN
 			 {:RESULT = new Absyn.PostFixExp(e1left, e1, 2, e2):}
-			  |postfix_expression PERIOD IDENTIFIER
-			  	 {:RESULT = new Absyn.PostFixExp(e1left, e1, 3, e2)}:
-			  |postfix_expression ARROW IDENTIFIER
-			  	 {:RESULT = new Absyn.PostFixExp(e1left, e1, 4, e2):}
-			  |postfix_expression INCREMENT
-			  {: RESULT = new Absyn.UnaryExp(e1left, 0, e1) :}
-			  |postfix_expression DECREMENT
-			   {: RESULT = new Absyn.UnaryExp(e1left, 1, e1) :}
+			  |postfix_expression:e PERIOD ID
+				{:RESULT = new Absyn.PostFixExp(eleft, e, 3):}
+			  |postfix_expression:e ARROW ID
+			  	 {:RESULT = new Absyn.PostFixExp(eleft, e, 4):}
+			  |postfix_expression:e INCREMENT
+			  {: RESULT = new Absyn.UnaryExp(eleft, 0, e) :}
+			  |postfix_expression:e DECREMENT
+			   {: RESULT = new Absyn.UnaryExp(eleft, 1, e) :}
+			   ;
                           
-argument_expression_list ::=assignment_expression
-			 |argument_expression_list COMMA assignment_expression
-			 {:RESULT = new Absyn.ArgExpList(e1left,e1,t1,x1):}
+argument_expression_list ::= assignment_expression:e
+			{:RESULT = new Absyn.ArgExpList(eleft, e):}
+			 |argument_expression_list:e1 COMMA assignment_expression:e2
+			 {:RESULT = new Absyn.ArgExpList(e1left, e1, e2):}
+			 ;
 
 
 
 unary_expression    ::=postfix_expression
-			|INCREMENT unary_expression
-			{: RESULT = new Absyn.UnaryExp(e1left, 0, e1):}
-			|DECREMENT unary_expression
-			{: RESULT = new Absyn.UnaryExp(e1left, 1, e1):}
+			|INCREMENT unary_expression:e
+			{: RESULT = new Absyn.UnaryExp(eleft, 0, e):}
+			|DECREMENT unary_expression:e
+			{: RESULT = new Absyn.UnaryExp(eleft, 1, e):}
 			|unary_operator cast_expression
-			|SIZEOF unary_expression
-			{: RESULT = new Absyn.UnaryExp(e1left, 2, e1):}
-			|SIZEOF LPAREN type_name RPAREN;
-			{: RESULT = new Absyn.UnaryExp(e1left, 2, e1):}
+			|SIZEOF unary_expression:e
+			{: RESULT = new Absyn.UnaryExp(eleft, 2, e):}
+			|SIZEOF LPAREN type_name:e RPAREN
+			{: RESULT = new Absyn.UnaryExp(eleft, 2, e):}
+			;
 
 unary_operator  ::=AMPERSAND
-			 {: RESULT = new Absyn.UnaryOps(e1left, 0):}
-			|BITWISEAND
-			 {: RESULT = new Absyn.UnaryOps(e1left, 5):}
+			 {: RESULT = new Absyn.UnaryOps(eleft, 0):}
+			|BWISEAND
+			 {: RESULT = new Absyn.UnaryOps(eleft, 5):}
 			|TIMES
-			{: RESULT = new Absyn.UnaryOps(e1left, 1); :}
+			{: RESULT = new Absyn.UnaryOps(eleft, 1) :}
 			|PLUS
-			 {: RESULT = new Absyn.UnaryOps(e1left, 2):}
+			 {: RESULT = new Absyn.UnaryOps(eleft, 2):}
 			|MINUS
-			  {: RESULT = new Absyn.UnaryOps(e1left, 3) :}
+			  {: RESULT = new Absyn.UnaryOps(eleft, 3) :}
 		    |TILDE
-			{: RESULT = new Absyn.UnaryOps(e1left, 4); :}
-			|EXCLAMATION;
+			{: RESULT = new Absyn.UnaryOps(eleft, 4) :}
+			;
 
 cast_expression   ::=unary_expression
-			|LPAREN type_name RPAREN cast_expression;
+			{: RESULT = (Absyn.Exp)$1; :}
+			|LPAREN type_name RPAREN cast_expression
+			{: RESULT = new Absyn.CastExp(@1left, (Absyn.Ty)$2, (Absyn.Exp)$4); :}
 
 
 
 multiplicative_expression  ::= cast_expression
-							|multiplicative_expression TIMES cast_expression
+							{: RESULT = (Absyn.Exp)$1; :}
+							|multiplicative_expression:e1 TIMES cast_expression:e2
 								 {:RESULT = new Absyn.BinOp(e1left, e1, 15, e2):}
-							|multiplicative_expression DIVIDE cast_expression
+							|multiplicative_expression:e1 DIVIDE cast_expression:e2
 								 {:RESULT = new Absyn.BinOp(e1left, e1, 16, e2):}
-							|multiplicative_expression MODULUS cast_expression
+							|multiplicative_expression:e1 MODULUS cast_expression:e2
 								 {:RESULT = new Absyn.BinOp(e1left, e1, 17, e2):}
 							 ;
 
 
 additive_expression ::=multiplicative_expression
-					|additive_expression PLUS multiplicative_expression 
+					|additive_expression:e1 PLUS multiplicative_expression:e2
 		 				{:RESULT = new Absyn.BinOp(e1left, e1, 13, e2):}
-					|additive_expression MINUS multiplicative_expression 
+					|additive_expression:e1 MINUS multiplicative_expression:e2
 						 {:RESULT = new Absyn.BinOp(e1left, e1, 14, e2):}
 					 ;
 
 
 shift_expression   ::=additive_expression
-					|shift_expression LSHIFT additive_expression
+					|shift_expression:e1 LSHIFT additive_expression:e2
 		 				{:RESULT = new Absyn.BinOp(e1left, e1, 11, e2):}			
-					|shift_expression RSHIFT additive_expression
+					|shift_expression:e1 RSHIFT additive_expression:e2
 						 {:RESULT = new Absyn.BinOp(e1left, e1, 12, e2):}
 					 ;
 
 
 relational_expression   ::=shift_expression
-						|relational_expression LT shift_expression
+						|relational_expression:e1 LT shift_expression:e2
 							{:RESULT = new Absyn.BinOp(e1left, e1, 7, e2):}
-						|relational_expression GT shift_expression
+						|relational_expression:e1 GT shift_expression:e2
 							{:RESULT = new Absyn.BinOp(e1left, e1, 8, e2):}
-						|relational_expression LE shift_expression
+						|relational_expression:e1 LE shift_expression:e2
 							{:RESULT = new Absyn.BinOp(e1left, e1, 9, e2):}
-						|relational_expression GE shift_expression
+						|relational_expression:e1 GE shift_expression:e2
 							{:RESULT = new Absyn.BinOp(e1left, e1, 10, e2):}
 						;
 
 
 equality_expression    ::=relational_expression
-			|equality_expression EQ relational_expression
+			|equality_expression:e1 EQ relational_expression:e2
 			{:RESULT = new Absyn.BinOp(e1left, e1, 5, e2):}
-			|equality_expression NEQ relational_expression
+			|equality_expression:e1 NEQ relational_expression:e2
 			{:RESULT = new Absyn.BinOp(e1left, e1, 6, e2):}
 			;
 
 AND_expression ::=  equality_expression
-	  |  AND_expression BITWISEAND equality_expression
+	  |  AND_expression:e1 BITWISEAND equality_expression:e2
 	  {:RESULT = new Absyn.BinOp(e1left, e1, 4, e2):}
-	  ; 
+	  ;
 
 exclusive_OR_expression ::=   AND_expression
-		  |  exclusive_OR_expression BWISEXOR AND_expression
+		  |  exclusive_OR_expression:e1 BWISEXOR AND_expression:e2
 		  {:RESULT = new Absyn.BinOp(e1left, e1, 3, e2):}
 		   ;
 
 inclusive_OR_expression ::=  exclusive_OR_expression
-		   |   inclusive_OR_expression BWISEOR exclusive_OR_expression
+		   |   inclusive_OR_expression:e1 BWISEOR exclusive_OR_expression:e2
 		   {:RESULT = new Absyn.BinOp(e1left, e1, 2, e2):}
 		   ;
 
 logical_AND_expression  ::=  inclusive_OR_expression
-		   |   logical_AND_expression AND inclusive_OR_expression
+		   |   logical_AND_expression:e1 AND inclusive_OR_expression:e2
 		   {:RESULT = new Absyn.BinOp(e1left, e1, 1, e2):}
 		    ;
 
 logical_OR_expression  ::=  logical_AND_expression
-		   |  logical_OR_expression OR logical_AND_expression
+		   |  logical_OR_expression:e1 OR logical_AND_expression:e2
 		   {:RESULT = new Absyn.BinOp(e1left, e1, 0, e2):}
 		    ;
 
 conditional_expression  ::= logical_OR_expression
-		   |  logical_OR_expression (?) expression COLON conditional_expression
+			 {: RESULT = (Absyn.Exp)$1; :}
+		   |  logical_OR_expression expression COLON conditional_expression
+		    {:
+         RESULT = new Absyn.CondExp(@1left,
+                                    (Absyn.Exp)$1,
+                                    (Absyn.Exp)$3,
+                                    (Absyn.Exp)$5);
+      :}
 		    ;
 
 assignment_expression  ::=  conditional_expression
+			{: RESULT = (Absyn.Exp)$1; :}
 		  |  unary_expression assignment_operator assignment_expression
+		  ary_expression assignment_operator assignment_expression
+      {:
+         // if only "=" supported:
+         RESULT = new Absyn.AssignExp(@1left, (Absyn.Var)$1, (Absyn.Exp)$3);
+      :}
 		  ;
 
-assignment_operator ::= ASSIGN 
-			{:RESULT = new Absyn.OpExp(e1left,10):}
-		   |MULASSIGN 
-		   	{:RESULT = new Absyn.OpExp(e1left,11):}
-		   |DIVASSIGN 
-		   {:RESULT = new Absyn.OpExp(e1left,12):}
-		   |MODASSIGN 
-		   {:RESULT = new Absyn.OpExp(e1left,13):}
-		   |ADDASSIGN 
-		   {:RESULT = new Absyn.OpExp(e1left,14):}
-		   |SUBASSIGN 
-		   {:RESULT = new Absyn.OpExp(e1left,15):}
-		   |LSHIFTASSIGN
-		   {:RESULT = new Absyn.OpExp(e1left,16):}
-		   |RSHIFTASSIGN 
-		   {:RESULT = new Absyn.OpExp(e1left,17):}
-		   |BWISEANDASSIGN 
-		   {:RESULT = new Absyn.OpExp(e1left,18):}
-		   |BWISEXORASSIGN 
-		   {:RESULT = new Absyn.OpExp(e1left,19):}
-		   |BWISEORASSIGN
-		   {:RESULT = new Absyn.OpExp(e1left,20):}
+assignment_operator ::= ASSIGN:e
+			{:RESULT = new Absyn.OpExp(eleft,10):}
+		   |MULASSIGN:e
+		   	{:RESULT = new Absyn.OpExp(eleft,11):}
+		   |DIVASSIGN:e
+		   {:RESULT = new Absyn.OpExp(eleft,12):}
+		   |MODASSIGN:e 
+		   {:RESULT = new Absyn.OpExp(eleft,13):}
+		   |ADDASSIGN:e 
+		   {:RESULT = new Absyn.OpExp(eleft,14):}
+		   |SUBASSIGN:e 
+		   {:RESULT = new Absyn.OpExp(eleft,15):}
+		   |LSHIFTASSIGN:e
+		   {:RESULT = new Absyn.OpExp(eleft,16):}
+		   |RSHIFTASSIGN:e 
+		   {:RESULT = new Absyn.OpExp(eleft,17):}
+		   |BWISEANDASSIGN:e 
+		   {:RESULT = new Absyn.OpExp(eleft,18):}
+		   |BWISEXORASSIGN:e 
+		   {:RESULT = new Absyn.OpExp(eleft,19):}
+		   |BWISEORASSIGN:e
+		   {:RESULT = new Absyn.OpExp(eleft,20):}
 		   ;

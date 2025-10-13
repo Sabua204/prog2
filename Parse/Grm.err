@@ -1,38 +1,186 @@
 Opening files...
 Parsing specification from standard input...
-Error at 37(8): Syntax error
-Error at 99(15): Syntax Error
-Error at 177(6): Syntax error
-Error at 185(24): Syntax Error
-Error at 193(6): Syntax error
-Error at 263(31): Syntax Error
-Error at 309(52): Syntax error
-Error at 363(22): Syntax Error
-Warning at 439(31): Unrecognized character '('(40) -- ignored
-Warning at 439(32): Unrecognized character '?'(63) -- ignored
-Warning at 439(33): Unrecognized character ')'(41) -- ignored
+Warning at 320(1): Unrecognized character '`'(96) -- ignored
+Error at 439(31): Syntax error
+Error at 450(24): Syntax Error
 ===== Terminals =====
-DIVIDE STRING_LITERAL GE CHAR_LITERAL PERIOD 
-LPAREN INT ARRAY FOR MINUS 
-RPAREN SEMICOLON AND LT FUN 
-TYPE IN OR COMMA PLUS 
-ASSIGN IF ID LE OF 
-EOF error NULL NEQ BREAK 
-EQ LBRACK TIMES COLON LBRACE 
-ELSE RBRACK TO WHILE LET 
-THEN RBRACE MODULUS DECIMAL_LITERAL END 
-GT VAR DO 
+ELIPSIS SHORT SIGNED TIMES GT 
+ARROW DIVASSIGN CONST GE PERIOD 
+REGISTER ENUM SIZEOF RBRACK COMMA 
+RBRACE RPAREN LBRACK LT INCREMENT 
+SUBASSIGN DOUBLE STRUCT LBRACE BWISEANDASSIGN 
+LPAREN MODASSIGN TILDE LE VAR 
+FLOAT GOTO EQ LSHIFTASSIGN MODULUS 
+LONG PLUS DIVIDE WHILE UNION 
+ASSIGN CHAR ADDASSIGN SWITCH DO 
+FOR EXTERN VOID RETURN ELSE 
+BREAK FUN AMPERSAND INT STRING_LITERAL 
+EOF SEMICOLON DEFAULT MULASSIGN DECREMENT 
+MINUS OR error DECIMAL_LITERAL CONTINUE 
+IF UNSIGNED BWISEAND BWISEOR ID 
+COLON BWISEXOR BWISEORASSIGN VOLATILE CHAR_LITERAL 
+CASE RSHIFT BWISEXORASSIGN NEQ AND 
+STATIC LSHIFT TYPEDEF AUTO 
 
 ===== Non terminals =====
-$START 
+struct_declaration_list bitfield_list declaration_list pointer_list initializer 
+additive_expression iteration_statement enumerator $START jump_statement 
+Var compound_statement constant_expression initializer_list type_qualifier_list 
+initialization struct_or_union primary_expression identifier name 
+argument_expression_list cast_expression expression_array_type_list bitfield_value enumerator_list 
+parameter_type_list expression Absyn type_parameters statement 
+unary_expression empty_array_type_list selection_statement brackets_list conditional_expression 
+TypeDec type_name postfix_expression typedef_name declaration_list_opt 
+expression_opt type_qualifier parameter_list empty_array_type expression_array_type 
+assignment_expression type_augments statement_list_opt expression_part multiplicative_expression 
+expression_statement identifier_list expression_list struct_or_union_declarator declaration 
+labeled_statement unary_operator statement_list type 
 
 ===== Productions =====
+assignment_expression ::= unary_expression assignment_expression assignment_expression 
+assignment_expression ::= conditional_expression 
+conditional_expression ::= expression COLON conditional_expression 
+conditional_expression ::= 
+additive_expression ::= additive_expression MINUS multiplicative_expression 
+additive_expression ::= additive_expression PLUS multiplicative_expression 
+additive_expression ::= multiplicative_expression 
+cast_expression ::= unary_expression 
+unary_operator ::= TILDE 
+unary_operator ::= MINUS 
+unary_operator ::= PLUS 
+unary_operator ::= TIMES 
+unary_operator ::= BWISEAND 
+unary_operator ::= AMPERSAND 
+unary_expression ::= SIZEOF LPAREN type_name RPAREN 
+unary_expression ::= SIZEOF unary_expression 
+unary_expression ::= unary_operator cast_expression 
+unary_expression ::= DECREMENT unary_expression 
+unary_expression ::= INCREMENT unary_expression 
+unary_expression ::= postfix_expression 
+argument_expression_list ::= argument_expression_list COMMA assignment_expression 
+argument_expression_list ::= assignment_expression 
+postfix_expression ::= postfix_expression DECREMENT 
+postfix_expression ::= postfix_expression INCREMENT 
+postfix_expression ::= postfix_expression ARROW ID 
+postfix_expression ::= postfix_expression PERIOD ID 
+postfix_expression ::= postfix_expression LPAREN argument_expression_list RPAREN 
+postfix_expression ::= postfix_expression LBRACK expression RBRACK 
+postfix_expression ::= primary_expression 
+primary_expression ::= LPAREN expression RPAREN 
+primary_expression ::= STRING_LITERAL 
+primary_expression ::= CONST 
+primary_expression ::= ID 
+typedef_name ::= identifier 
+identifier_list ::= identifier_list identifier 
+identifier_list ::= identifier 
+initializer ::= LBRACE initializer_list RBRACE 
+initializer ::= assignment_expression 
+initializer_list ::= initializer_list COMMA initializer 
+initializer_list ::= initializer 
+parameter_type_list ::= parameter_type_list COMMA type 
+parameter_type_list ::= type 
+type_qualifier ::= VOLATILE 
+type_qualifier ::= CONST 
+parameter_list ::= parameter_list COMMA type name 
+parameter_list ::= type_name 
+type_parameters ::= LPAREN RPAREN 
+type_parameters ::= LPAREN parameter_type_list COMMA ELIPSIS RPAREN 
+type_parameters ::= LPAREN parameter_type_list RPAREN 
+struct_or_union ::= UNION 
+struct_or_union ::= STRUCT 
+struct_declaration_list ::= struct_declaration_list type name SEMICOLON 
+struct_declaration_list ::= type name SEMICOLON 
+enumerator ::= ID ASSIGN constant_expression 
+enumerator ::= ID 
+enumerator_list ::= enumerator_list COMMA enumerator 
+enumerator_list ::= enumerator 
+struct_or_union_declarator ::= LBRACE struct_declaration_list RBRACE 
+initialization ::= ASSIGN initializer 
+initialization ::= 
+type_name ::= ID 
+type_name ::= ENUM ID 
+type_name ::= DOUBLE 
+type_name ::= FLOAT 
+type_name ::= LONG 
+type_name ::= INT 
+type_name ::= SHORT 
+type_name ::= CHAR 
+type_name ::= VOID 
+pointer_list ::= pointer_list TIMES 
+pointer_list ::= TIMES 
+brackets_list ::= expression_array_type_list 
+brackets_list ::= empty_array_type_list 
+type_augments ::= pointer_list brackets_list 
+type_augments ::= brackets_list 
+type_augments ::= pointer_list 
+type_qualifier_list ::= type_qualifier_list type_qualifier 
+type_qualifier_list ::= type_qualifier 
+type ::= type_name 
+type ::= type_name type_augments 
+expression_array_type ::= LBRACK constant_expression RBRACK 
+expression_array_type_list ::= expression_array_type_list expression_array_type 
+expression_array_type_list ::= expression_array_type 
+empty_array_type ::= LBRACK RBRACK 
+empty_array_type_list ::= empty_array_type_list empty_array_type 
+empty_array_type_list ::= empty_array_type 
+bitfield_value ::= REGISTER 
+bitfield_value ::= AUTO 
+bitfield_value ::= STATIC 
+bitfield_value ::= EXTERN 
+bitfield_value ::= VOLATILE 
+bitfield_value ::= CONST 
+bitfield_list ::= bitfield_value bitfield_list 
+bitfield_list ::= 
+name ::= ID 
+iteration_statement ::= FOR LPAREN expression_opt SEMICOLON expression_opt SEMICOLON expression_opt RPAREN statement 
+iteration_statement ::= DO statement WHILE LPAREN expression RPAREN SEMICOLON 
+iteration_statement ::= WHILE LPAREN expression RPAREN statement 
+selection_statement ::= SWITCH LPAREN expression RPAREN statement 
+selection_statement ::= IF LPAREN expression RPAREN statement ELSE statement 
+selection_statement ::= IF LPAREN expression RPAREN statement 
+expression_opt ::= expression 
+expression_opt ::= 
+expression_statement ::= expression_opt SEMICOLON 
+statement_list ::= statement_list statement 
+statement_list ::= statement 
+statement_list_opt ::= statement_list 
+statement_list_opt ::= 
+declaration_list ::= declaration_list declaration 
+declaration_list ::= declaration 
+declaration_list_opt ::= declaration_list 
+declaration_list_opt ::= 
+compound_statement ::= LBRACE declaration_list_opt statement_list_opt RBRACE 
+labeled_statement ::= DEFAULT COLON statement 
+labeled_statement ::= CASE constant_expression COLON statement 
+labeled_statement ::= ID COLON statement 
+statement ::= jump_statement 
+statement ::= iteration_statement 
+statement ::= selection_statement 
+statement ::= expression_statement 
+statement ::= compound_statement 
+statement ::= labeled_statement 
+expression_part ::= expression SEMICOLON 
+expression_list ::= expression_part 
+expression_list ::= expression_list expression_part 
+Var ::= ID 
+declaration ::= ENUM ID LBRACE enumerator_list RBRACE 
+declaration ::= bitfield_list struct_or_union name struct_or_union_declarator 
+declaration ::= TYPEDEF type name SEMICOLON 
+declaration ::= FUN bitfield_list type name type_parameters SEMICOLON 
+declaration ::= FUN bitfield_list type name type_parameters compound_statement 
+declaration ::= VAR bitfield_list type name initialization SEMICOLON 
+declaration ::= VAR bitfield_list type name initialization SEMICOLON 
+expression ::= expression COMMA assignment_expression 
+expression ::= assignment_expression 
+expression ::= Var 
+expression ::= error 
+$START ::= expression EOF 
 
 ===== Viable Prefix Recognizer =====
 Closing files...
 ------- CUP v0.10g Parser Generation Summary -------
-  8 errors and 3 warnings
-  48 terminals, 1 non terminal, and 0 productions declared, 
+  2 errors and 1 warning
+  84 terminals, 59 non terminals, and 138 productions declared, 
   producing 0 unique parse states.
   0 terminals declared but not used.
   0 non terminals declared but not used.

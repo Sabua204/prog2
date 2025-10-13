@@ -1,12 +1,17 @@
 package Absyn;
-import Symbol.Symbol;
 
-public class StmtList {
+public class StmtList extends Statement{
+    public int pos;
     public Statement head;
     public StmtList tail;
-
-
-    public StmtList(Statement h, StmtList t) { 
+    public StmtList(int p, Statement h, StmtList t) { 
+        pos = p;
         head = h;
-        tail = t;}
+        tail = t;
+    }
+    public StmtList(int p, Statement h) {
+        pos = p;
+        head = h;
+        tail = null;
+    }
 } 

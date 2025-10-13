@@ -279,11 +279,11 @@ public class Print {
     say("FieldList("); 
     if (f!=null) {
       sayln("");
-      indent(d+1); say(f.name.toString()); sayln(",");
-      indent(d+1); say(f.typ.toString()); sayln(",");
+      indent(d+1); say(f.head.toString()); sayln(",");
+      indent(d+1); say(f.tail.toString()); sayln(",");
       indent(d+1); say(f.escape);
       sayln(",");
-      prFieldlist(f.tail, d+1);
+      prFieldlist(f, d);
     }
     say(")");
   }
