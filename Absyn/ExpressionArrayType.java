@@ -1,9 +1,9 @@
 package Absyn;
 
 public class ExpressionArrayType {
-    public Exp size; 
-
-    public ExpressionArrayType(Exp size) {
-        this.size = size;
+    public Ty type; 
+    
+    public ExpressionArrayType(Ty t) {
+        type=t;
     }
 }

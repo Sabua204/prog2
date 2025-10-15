@@ -557,7 +557,7 @@ private int [][] unpackFromString(int size1, int size2, String st)
 					case -7:
 						break;
 					case 6:
-						{return tok(sym.BWISEAND);}
+						{return tok(sym.BITWISEAND);}
 					case -8:
 						break;
 					case 7:

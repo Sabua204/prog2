@@ -1,6 +1,6 @@
 package Absyn;
 
-public class EmptyArrayTypeList {
+public class EmptyArrayTypeList extends Exp {
     public int count; 
 
     public EmptyArrayTypeList(int count) {

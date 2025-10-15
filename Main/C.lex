@@ -144,7 +144,7 @@ ASCII=ASCII=[0-9]+
 <YYINITIAL> "!=" {return tok(sym.NEQ);}
 <YYINITIAL> "^" {return tok(sym.BWISEXOR);}
 <YYINITIAL> "&&" {return tok(sym.AND);}
-<YYINITIAL> "&" {return tok(sym.BWISEAND);}
+<YYINITIAL> "&" {return tok(sym.BITWISEAND);}
 <YYINITIAL> "||" {return tok(sym.OR);}
 <YYINITIAL> "|" {return tok(sym.BWISEOR);}
 

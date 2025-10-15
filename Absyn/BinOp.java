@@ -14,7 +14,7 @@ public class BinOp extends Exp
     AND = 1,
     BWISEOR = 2,
     BWISEXOR = 3,
-    BITWISEAND = 4,
+    BWISEAND = 4,
     EQ = 5,
     NEQ = 6,
     LT = 7,
